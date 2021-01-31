@@ -176,7 +176,7 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="card-title"><span class="badge badge-danger" style="font-size: large;" id="containterTelemetryStatus">OFF</span></h4>
-                                <button class="btn btn-primary animation-on-hover" type="button" id="containterTelemetrySwitch">Toggle</button>
+                                <button class="btn btn-primary animation-on-hover toggleButtons" type="button" id="containterTelemetrySwitch">Toggle</button>
                             </div>
                         </div>
                     </div>
@@ -187,7 +187,7 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="card-title"><span class="badge badge-danger" style="font-size: large;" id="SP1TelemetryStatus">OFF</span></h4>
-                                <button class="btn btn-primary animation-on-hover" type="button" id="SP1TelemetrySwitch">Toggle</button>
+                                <button class="btn btn-primary animation-on-hover toggleButtons" type="button" id="SP1TelemetrySwitch">Toggle</button>
                             </div>
                         </div>
                     </div>
@@ -198,7 +198,7 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="card-title"><span class="badge badge-danger" style="font-size: large;" id="SP2TelemetryStatus">OFF</span></h4>
-                                <button class="btn btn-primary animation-on-hover" type="button" id="SP2TelemetrySwitch">Toggle</button>
+                                <button class="btn btn-primary animation-on-hover toggleButtons" type="button" id="SP2TelemetrySwitch">Toggle</button>
                             </div>
                         </div>
                     </div>
@@ -209,7 +209,7 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="card-title"><span class="badge badge-danger" style="font-size: large;" id="simulationEnableStatus">OFF</span></h4>
-                                <button class="btn btn-primary animation-on-hover" type="button" id="simulationEnableSwitch">Toggle</button>
+                                <button class="btn btn-primary animation-on-hover toggleButtons" type="button" id="simulationEnableSwitch">Toggle</button>
                             </div>
                         </div>
                     </div>
@@ -220,7 +220,7 @@
                             </div>
                             <div class="card-body">
                                 <h4 class="card-title"><span class="badge badge-danger" style="font-size: large;" id="simulationAvtiveStatus">OFF</span></h4>
-                                <button class="btn btn-primary animation-on-hover" type="button" id="simulationAvtiveSwitch">Toggle</button>
+                                <button class="btn btn-primary animation-on-hover toggleButtons" type="button" id="simulationAvtiveSwitch">Toggle</button>
                             </div>
                         </div>
                     </div>
@@ -692,6 +692,11 @@
     <script src="../assets/js/black-dashboard.min.js?v=1.0.0"></script>
     <!-- Black Dashboard DEMO methods, don't include it in your project! -->
     <script src="../assets/demo/demo.js"></script>
+
+    <!-- Toggle Buttons Status Changing JS -->
+    <script src="../assets/js/UIlogics/toggleButtons.js"></script>
+
+
     <script>
         $(document).ready(function() {
             $().ready(function() {
