@@ -12,13 +12,14 @@
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,600,700,800" rel="stylesheet" />
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"> -->
+    <script src="https://kit.fontawesome.com/be11e294d7.js" crossorigin="anonymous"></script>
     <!-- Nucleo Icons -->
     <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link href="../assets/css/black-dashboard.css?v=1.0.0" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="../assets/demo/demo.css" rel="stylesheet" />
+    <!-- <link href="../assets/demo/demo.css" rel="stylesheet" /> -->
 </head>
 
 <body class="">
@@ -142,6 +143,7 @@
             </div>
             <!-- End Navbar -->
             <div class="content">
+                <!-- Telemetry Buttons -->
                 <div class="row">
                     <div class="col-xl-3 col-6">
                         <div class="card card-nav-tabs text-center">
@@ -193,66 +195,79 @@
                                 Simulation Active
                             </div>
                             <div class="card-body">
-                                <h4 class="card-title"><span class="badge badge-danger" style="font-size: large;" id="simulationAvtiveStatus">OFF</span></h4>
-                                <button class="btn btn-primary animation-on-hover toggleButtons" type="button" id="simulationAvtiveSwitch">Toggle</button>
+                                <h4 class="card-title"><span class="badge badge-default" style="font-size: large;" id="simulationAvtiveStatus">OFF</span></h4>
+                                <button class="btn btn-primary animation-on-hover toggleButtons" type="button" id="simulationAvtiveSwitch" value="0" disabled>Toggle</button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!--Altitude Chart-->
                 <div class="row">
                     <div class="col-12">
                         <div class="card card-chart">
                             <div class="card-header ">
                                 <div class="row">
                                     <div class="col-sm-6 text-left">
-                                        <h5 class="card-category">Parameters</h5>
-                                        <h2 class="card-title">Altitude</h2>
+                                        <!-- <h5 class="card-category">Parameters</h5> -->
+
+                                        <h3 class="card-title"><i class="fas fa-mountain"></i> Altitude</h3>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="btn-group btn-group-toggle float-right" data-toggle="buttons">
                                             <label class="btn btn-sm btn-primary btn-simple active" id="0">
-                        <input type="radio" name="options" checked>
-                        <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Container</span>
-                        <span class="d-block d-sm-none">
-                          <i class="tim-icons icon-single-02"></i>
-                        </span>
-                      </label>
+                                                <input type="radio" name="options" checked>
+                                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Container</span>
+                                                <span class="d-block d-sm-none">
+                                                    <i class="tim-icons icon-single-02"></i>
+                                                </span>
+                                            </label>
                                             <label class="btn btn-sm btn-primary btn-simple" id="1">
-                        <input type="radio" class="d-none d-sm-none" name="options">
-                        <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Payload</span>
-                        <span class="d-block d-sm-none">
-                          <i class="tim-icons icon-gift-2"></i>
-                        </span>
-                      </label>
+                                                <input type="radio" class="d-none d-sm-none" name="options">
+                                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Payload I</span>
+                                                <span class="d-block d-sm-none">
+                                                    <i class="tim-icons icon-gift-2"></i>
+                                                </span>
+                                            </label>
+                                            <label class="btn btn-sm btn-primary btn-simple" id="2">
+                                                <input type="radio" class="d-none d-sm-none" name="options">
+                                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Payload II</span>
+                                                <span class="d-block d-sm-none">
+                                                    <i class="tim-icons icon-gift-2"></i>
+                                                </span>
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="chart-area">
-                                    <canvas id="chartBig1"></canvas>
+                                    <canvas id="chartAltitude"></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- Container Battery Voltage -->
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card card-chart">
                             <div class="card-header">
                                 <h5 class="card-category">Container Battery Voltage</h5>
-                                <h3 class="card-title"><i class="tim-icons icon-bell-55 text-primary"></i>4.8V</h3>
+                                <h3 class="card-title">
+                                    <!-- <i class="tim-icons icon-bell-55 text-primary"></i> -->
+                                    <i class="fas fa-bolt"></i>
+                                    <span id="batteryVoltage">4.8</span> V</h3>
                             </div>
                             <div class="card-body">
                                 <div class="chart-area">
-                                    <canvas id="chartLinePurple"></canvas>
+                                    <canvas id="chartBatteryVoltage"></canvas>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- Live Table -->
                 <div class="row">
-
                     <div class="col-lg-12 col-md-12">
                         <div class="card ">
                             <div class="card-header">
@@ -448,6 +463,7 @@
 
     <!-- Toggle Buttons Status Changing JS -->
     <script src="../assets/js/UIlogics/toggleButtons.js"></script>
+    <script src="../assets/js/UIlogics/mainLogics.js"></script>
 
 
     <script>

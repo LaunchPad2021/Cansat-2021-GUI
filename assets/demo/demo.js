@@ -183,7 +183,7 @@ demo = {
                     },
                     ticks: {
                         suggestedMin: 60,
-                        suggestedMax: 125,
+                        suggestedMax: 100,
                         padding: 20,
                         fontColor: "#9a9a9a"
                     }
@@ -198,7 +198,9 @@ demo = {
                     },
                     ticks: {
                         padding: 20,
-                        fontColor: "#9a9a9a"
+                        fontColor: "#9a9a9a",
+                        autoSkip: true,
+                        maxTicksLimit: 20
                     }
                 }]
             }
@@ -278,8 +280,8 @@ demo = {
                         zeroLineColor: "transparent",
                     },
                     ticks: {
-                        suggestedMin: 50,
-                        suggestedMax: 125,
+                        suggestedMin: 1,
+                        suggestedMax: 5,
                         padding: 20,
                         fontColor: "#9e9e9e"
                     }
@@ -294,7 +296,9 @@ demo = {
                     },
                     ticks: {
                         padding: 20,
-                        fontColor: "#9e9e9e"
+                        fontColor: "#9e9e9e",
+                        autoSkip: true,
+                        maxTicksLimit: 20
                     }
                 }]
             }
@@ -349,95 +353,115 @@ demo = {
             }
         };
 
-        var ctx = document.getElementById("chartLinePurple").getContext("2d");
-
-        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-
-        gradientStroke.addColorStop(1, 'rgba(72,72,176,0.2)');
-        gradientStroke.addColorStop(0.2, 'rgba(72,72,176,0.0)');
-        gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
-
-        var data = {
-            labels: ['1s', '2s', '3s', '4s', '5s', '6s', '7s', '8s', '9s', '10s', '11s', '12s'],
-            datasets: [{
-                label: "Volts (V)",
-                fill: true,
-                backgroundColor: gradientStroke,
-                borderColor: '#d048b6',
-                borderWidth: 2,
-                borderDash: [],
-                borderDashOffset: 0.0,
-                pointBackgroundColor: '#d048b6',
-                pointBorderColor: 'rgba(255,255,255,0)',
-                pointHoverBackgroundColor: '#d048b6',
-                pointBorderWidth: 20,
-                pointHoverRadius: 4,
-                pointHoverBorderWidth: 15,
-                pointRadius: 4,
-                data: [80, 100, 70, 80, 120, 80, 80, 100, 70, 80, 120, 80],
-            }]
-        };
-
-        var myChart = new Chart(ctx, {
-            type: 'line',
-            data: data,
-            options: gradientChartOptionsConfigurationWithTooltipPurple
-        });
-
-
-        // var ctxGreen = document.getElementById("chartLineGreen").getContext("2d");
+        // var ctx = document.getElementById("chartBatteryVoltage").getContext("2d");
 
         // var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
-        // gradientStroke.addColorStop(1, 'rgba(66,134,121,0.15)');
-        // gradientStroke.addColorStop(0.4, 'rgba(66,134,121,0.0)'); //green colors
-        // gradientStroke.addColorStop(0, 'rgba(66,134,121,0)'); //green colors
+        // gradientStroke.addColorStop(1, 'rgba(72,72,176,0.2)');
+        // gradientStroke.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+        // gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
 
         // var data = {
-        //     labels: ['JUL', 'AUG', 'SEP', 'OCT', 'NOV'],
+        //     labels: ['1s', '2s', '3s', '4s', '5s', '6s', '7s', '8s', '9s', '10s', '11s', '12s'],
         //     datasets: [{
-        //         label: "My First dataset",
+        //         label: "Volts (V)",
         //         fill: true,
         //         backgroundColor: gradientStroke,
-        //         borderColor: '#00d6b4',
+        //         borderColor: '#d048b6',
         //         borderWidth: 2,
         //         borderDash: [],
         //         borderDashOffset: 0.0,
-        //         pointBackgroundColor: '#00d6b4',
+        //         pointBackgroundColor: '#d048b6',
         //         pointBorderColor: 'rgba(255,255,255,0)',
-        //         pointHoverBackgroundColor: '#00d6b4',
+        //         pointHoverBackgroundColor: '#d048b6',
         //         pointBorderWidth: 20,
         //         pointHoverRadius: 4,
         //         pointHoverBorderWidth: 15,
         //         pointRadius: 4,
-        //         data: [90, 27, 60, 12, 80],
+        //         data: [80, 100, 70, 80, 120, 80, 80, 100, 70, 80, 120, 80],
         //     }]
         // };
 
-        // var myChart = new Chart(ctxGreen, {
+        // var myChart = new Chart(ctx, {
         //     type: 'line',
         //     data: data,
-        //     options: gradientChartOptionsConfigurationWithTooltipGreen
-
+        //     options: gradientChartOptionsConfigurationWithTooltipPurple
         // });
 
 
+        chartAltitudeLabel = ['0s'];
+        containerAltitude = [0];
+        payload1Altitude = [0];
+        payload2Altitude = [0];
+        volatage = [4.8]
 
-        var chart_labels = ['1s', '2s', '3s', '4s', '5s', '6s', '7s', '8s', '9s', '10s', '11s', '12s'];
-        var chart_data = [0, 10, 30, 60, 120, 240, 480, 240, 120, 60, 30, 10];
+        var voltageChartInit = document.getElementById("chartBatteryVoltage").getContext("2d");
+
+        var gradientStroke = voltageChartInit.createLinearGradient(0, 230, 0, 50);
+
+        gradientStroke.addColorStop(1, 'rgba(66,134,121,0.15)');
+        gradientStroke.addColorStop(0.4, 'rgba(66,134,121,0.0)'); //green colors
+        gradientStroke.addColorStop(0, 'rgba(66,134,121,0)'); //green colors
+
+        // var data = {
+        //     labels: chartAltitudeLabel,
+        //     datasets: [{
+        //         label: "Volts (V)",
+        //         fill: true,
+        //         backgroundColor: gradientStroke,
+        //         borderColor: '#d048b6',
+        //         borderWidth: 2,
+        //         borderDash: [],
+        //         borderDashOffset: 0.0,
+        //         pointBackgroundColor: '#d048b6',
+        //         pointBorderColor: 'rgba(255,255,255,0)',
+        //         pointHoverBackgroundColor: '#d048b6',
+        //         pointBorderWidth: 20,
+        //         pointHoverRadius: 4,
+        //         pointHoverBorderWidth: 15,
+        //         pointRadius: 4,
+        //         data: volatage
+        //     }]
+        // };
+        var data = {
+            labels: chartAltitudeLabel,
+            datasets: [{
+                label: "Volts (V)",
+                fill: true,
+                backgroundColor: gradientStroke,
+                borderColor: '#00d6b4',
+                borderWidth: 2,
+                borderDash: [],
+                borderDashOffset: 0.0,
+                pointBackgroundColor: '#00d6b4',
+                pointBorderColor: 'rgba(255,255,255,0)',
+                pointHoverBackgroundColor: '#00d6b4',
+                pointBorderWidth: 20,
+                pointHoverRadius: 4,
+                pointHoverBorderWidth: 15,
+                pointRadius: 4,
+                data: volatage
+            }]
+        };
+
+        voltageChart = new Chart(voltageChartInit, {
+            type: 'line',
+            data: data,
+            options: gradientChartOptionsConfigurationWithTooltipGreen
+        });
 
 
-        var ctx = document.getElementById("chartBig1").getContext('2d');
 
-        var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
 
-        gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
-        gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
-        gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
+
+
+
+        var altitudeChart = document.getElementById("chartAltitude").getContext('2d');
+        var gradientStroke = altitudeChart.createLinearGradient(0, 230, 0, 50);
         var config = {
             type: 'line',
             data: {
-                labels: chart_labels,
+                labels: chartAltitudeLabel,
                 datasets: [{
                     label: "Altitude (Meters)",
                     fill: true,
@@ -453,66 +477,28 @@ demo = {
                     pointHoverRadius: 4,
                     pointHoverBorderWidth: 15,
                     pointRadius: 4,
-                    data: chart_data,
+                    data: containerAltitude,
                 }]
             },
             options: gradientChartOptionsConfigurationWithTooltipPurple
         };
-        var myChartData = new Chart(ctx, config);
-        $("#0").click(function() {
-            var data = myChartData.config.data;
-            data.datasets[0].data = chart_data;
-            data.labels = chart_labels;
-            myChartData.update();
-        });
-        $("#1").click(function() {
-            var chart_data = [0, 10, 30, 60, 120, 240, 500, 540, 600, 800, 1200, 1500];
-            var data = myChartData.config.data;
-            data.datasets[0].data = chart_data;
-            data.labels = chart_labels;
-            myChartData.update();
-        });
 
-        $("#2").click(function() {
-            var chart_data = [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130];
-            var data = myChartData.config.data;
-            data.datasets[0].data = chart_data;
-            data.labels = chart_labels;
-            myChartData.update();
-        });
+        gradientStroke.addColorStop(1, 'rgba(72,72,176,0.1)');
+        gradientStroke.addColorStop(0.4, 'rgba(72,72,176,0.0)');
+        gradientStroke.addColorStop(0, 'rgba(119,52,169,0)'); //purple colors
 
+        altitudeChartData = new Chart(altitudeChart, config);
 
-        // var ctx = document.getElementById("CountryChart").getContext("2d");
-
-        // var gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
-
-        // gradientStroke.addColorStop(1, 'rgba(29,140,248,0.2)');
-        // gradientStroke.addColorStop(0.4, 'rgba(29,140,248,0.0)');
-        // gradientStroke.addColorStop(0, 'rgba(29,140,248,0)'); //blue colors
-
-
-        // var myChart = new Chart(ctx, {
-        //     type: 'bar',
-        //     responsive: true,
-        //     legend: {
-        //         display: false
-        //     },
-        //     data: {
-        //         labels: ['USA', 'GER', 'AUS', 'UK', 'RO', 'BR'],
-        //         datasets: [{
-        //             label: "Countries",
-        //             fill: true,
-        //             backgroundColor: gradientStroke,
-        //             hoverBackgroundColor: gradientStroke,
-        //             borderColor: '#1f8ef1',
-        //             borderWidth: 2,
-        //             borderDash: [],
-        //             borderDashOffset: 0.0,
-        //             data: [53, 20, 10, 80, 100, 45],
-        //         }]
-        //     },
-        //     options: gradientBarChartConfiguration
+        // $("#0").click(function() {
+        //     var data = altitudeChartData.config.data;
+        //     data.datasets[0].data = containerAltitude
+        //     data.labels = chartAltitudeLabel;
+        //     altitudeChartData.update();
         // });
+
+        $("#0").click(updateContainerTelemetry);
+        $("#1").click(updatePayload1Telemetry);
+        $("#2").click(updatePayload2Telemetry);
 
     },
 
