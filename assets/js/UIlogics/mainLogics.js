@@ -7,14 +7,14 @@ function updateContainerTelemetry() {
 
 function updatePayload1Telemetry() {
     var data = altitudeChartData.config.data;
-    data.datasets[0].data = payload1Altitude
+    data.datasets[0].data = payload1Altitude;
     data.labels = chartAltitudeLabel;
     altitudeChartData.update();
 }
 
 function updatePayload2Telemetry() {
     var data = altitudeChartData.config.data;
-    data.datasets[0].data = payload2Altitude
+    data.datasets[0].data = payload2Altitude;
     data.labels = chartAltitudeLabel;
     altitudeChartData.update();
 }
@@ -30,12 +30,12 @@ function runSimulation() {
         volatage.push(currentVoltage);
         $("#batteryVoltage").text(currentVoltage);
         altitudeChartData.update();
-        voltageChart.update()
+        voltageChart.update();
         i = i + 1;
 
     }, 1000);
 }
 
 function stopSimulation() {
-    clearInterval(simulator)
+    clearInterval(simulator);
 }

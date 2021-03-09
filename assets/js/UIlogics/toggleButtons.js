@@ -8,11 +8,11 @@ document.querySelectorAll('.toggleButtons').forEach(item => {
 function changeStatus(toggleStatusId) {
     let button = document.getElementById(toggleStatusId)
     if (button.className == "badge badge-danger") {
-        button.className = "badge badge-success"
-        button.textContent = "ON"
+        button.className = "badge badge-success";
+        button.textContent = "ON";
     } else {
-        button.className = "badge badge-danger"
-        button.textContent = "OFF"
+        button.className = "badge badge-danger";
+        button.textContent = "OFF";
     }
 }
 
@@ -34,7 +34,7 @@ simulationEnableSwitch.addEventListener("click", event => {
 var simulationAvtiveSwitch = document.querySelector("#simulationAvtiveSwitch").addEventListener("click", event => {
     simulationActiveStatus = document.getElementById("simulationAvtiveStatus");
     if (simulationActiveStatus.textContent == "OFF") {
-        stopSimulation()
+        stopSimulation();
     } else {
         runSimulation();
     }
