@@ -6,6 +6,7 @@ client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
 
 // connect the client
+
 client.connect({ onSuccess: onConnect });
 
 
@@ -13,8 +14,7 @@ client.connect({ onSuccess: onConnect });
 function onConnect() {
     // Once a connection has been made, make a subscription and send a message.
     notificationMessage = ["Connected to server!", 1];
-    console.log(notificationMessage);
-    demo.showNotification();
+    main.showNotification();
     client.subscribe("cansat/container");
     client.subscribe("cansat/sp1");
     client.subscribe("cansat/sp2");
@@ -48,28 +48,35 @@ function onMessageArrived(message) {
     }
 }
 
-// IDs
-// GPS_LATITUDE             11      DONE
-// GPS_LONGITUDE            12      DONE
-// GPS_ALTITUDE             13      DONE
-// CONTAINER_PACKET_COUNT   2       DONE
-// SP1_PACKET_COUNT         16      DONE
-// SP2_PACKET_COUNT         17      DONE
-// SP1_ROTATION_RATE        6       DONE
-// SP2_ROTATION_RATE        6       DONE
-// SP1_RELEASED             5       DONE
-// SP2_RELEASED             6       DONE
-// CONTAINER_TEMP           8       DONE
-// SP1_TEMP                 5       DONE
-// SP2_TEMP                 5       DONE
-// CONTAINER_ALTITUDE       7       DONE
-// SP1_ALTITUDE             4       DONE
-// SP2_ALTITUDE             4       DONE
+/*************************************
+IDs                     Index   Status
+GPS_LATITUDE             11      DONE
+GPS_LONGITUDE            12      DONE
+GPS_ALTITUDE             13      DONE
+CONTAINER_PACKET_COUNT   2       DONE
+SP1_PACKET_COUNT         16      DONE
+SP2_PACKET_COUNT         17      DONE
+SP1_ROTATION_RATE        6       DONE
+SP2_ROTATION_RATE        6       DONE
+SP1_RELEASED             5       DONE
+SP2_RELEASED             6       DONE
+CONTAINER_TEMP           8       DONE
+SP1_TEMP                 5       DONE
+SP2_TEMP                 5       DONE
+CONTAINER_ALTITUDE       7       DONE
+SP1_ALTITUDE             4       DONE
+SP2_ALTITUDE             4       DONE
+**************************************/
 
 function processContainerTelemetry() {
+    // PUSH ALTITUDE ON ALTITUDE CHART DATA VARIABLE
     chartContainerAltitudeLabel.push(`${telemetryData[2]}s`);
     containerAltitude.push(telemetryData[7]);
+
+    // PUSH VOLTAGE ON VOLTAGE CHART DATA VARIABLE
     volatage.push(telemetryData[9]);
+    chartVoltageLabel.push(`${telemetryData[2]}s`);
+
 
     document.getElementById("GPS_LATITUDE").innerText = telemetryData[11];
     document.getElementById("GPS_LONGITUDE").innerText = telemetryData[12];
@@ -77,39 +84,40 @@ function processContainerTelemetry() {
     document.getElementById("CONTAINER_ALTITUDE").innerText = telemetryData[7];
     document.getElementById("CONTAINER_PACKET_COUNT").innerText = telemetryData[2];
     document.getElementById("CONTAINER_TEMP").innerText = telemetryData[8];
+    document.getElementById("SP1_PACKET_COUNT").innerText = telemetryData[16];
+    document.getElementById("SP2_PACKET_COUNT").innerText = telemetryData[17];
 
-    document.getElementById("SP1_PACKET_COUNT").innerText = telemetryData[16]
-    document.getElementById("SP2_PACKET_COUNT").innerText = telemetryData[17]
-
-
+    // CHECK IF PAYLOAD IS RELEASED AND UPDATE UI
     updateReleaseStatus();
-    // updateContainerTelemetry();
-    altitudeChartData.update();
+
+    // UPDATE CHARTS
+    altitudeChart.update();
     voltageChart.update();
 }
 
+// PROCESS AND UPDATE PAYLOAD 1 DATA AND ALTITUDE CHART
 function processPayload1Telemetry() {
     document.getElementById("SP1_ROTATION_RATE").innerText = telemetryData[6];
     document.getElementById("SP1_TEMP").innerText = telemetryData[5];
     document.getElementById("SP1_ALTITUDE").innerText = telemetryData[4];
     chartPayload1AltitudeLabel.push(`${telemetryData[2]}s`);
     payload1Altitude.push(telemetryData[4]);
-    altitudeChartData.update();
-
-    // updatePayload1Telemetry();
+    altitudeChart.update();
 }
 
+// PROCESS AND UPDATE PAYLOAD 2 DATA AND ALTITUDE CHART
 function processPayload2Telemetry() {
     document.getElementById("SP2_ROTATION_RATE").innerText = telemetryData[6];
     document.getElementById("SP2_TEMP").innerText = telemetryData[5];
     document.getElementById("SP2_ALTITUDE").innerText = telemetryData[4];
     chartPayload2AltitudeLabel.push(`${telemetryData[2]}s`);
     payload2Altitude.push(telemetryData[4]);
-    altitudeChartData.update();
-
-    // updatePayload2Telemetry();
+    altitudeChart.update();
 }
 
+// GLOBAL
+// INITIALLY BOTH ARE NOT RELEASED
+// [PAYLOAD 1 STATUS, PAYLOAD 2 STATUS]
 RELEASE_NOTIFIED = [false, false];
 
 function updateReleaseStatus() {
@@ -119,7 +127,7 @@ function updateReleaseStatus() {
         if (!RELEASE_NOTIFIED[0]) {
             RELEASE_NOTIFIED[0] = true;
             notificationMessage = ["Payload 1 Released..!", 2];
-            demo.showNotification();
+            main.showNotification();
         }
         sp1.className = "badge badge-success";
     }
@@ -129,7 +137,7 @@ function updateReleaseStatus() {
         if (!RELEASE_NOTIFIED[1]) {
             RELEASE_NOTIFIED[1] = true;
             notificationMessage = ["Payload 2 Released..!", 2];
-            demo.showNotification();
+            main.showNotification();
         }
         sp1.className = "badge badge-success";
     }
@@ -139,8 +147,6 @@ function updateReleaseStatus() {
 
 document.getElementById("containterTelemetrySwitch").addEventListener("click", function() {
     var status = document.getElementById("containterTelemetryStatus").innerText;
-    console.log(status)
-
     switch (status) {
         case "OFF":
             var message = "ON";
@@ -150,7 +156,7 @@ document.getElementById("containterTelemetrySwitch").addEventListener("click", f
             break;
     }
     notificationMessage = [`Turning Telemetry ${message}`, 0];
-    demo.showNotification()
+    main.showNotification()
     var message = new Paho.MQTT.Message(message);
     message.destinationName = "cansat/telemetry";
     client.send(message);
