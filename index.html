@@ -282,13 +282,13 @@
                                                     Parameter
                                                 </th>
                                                 <th>
-                                                    Value A
+
                                                 </th>
                                                 <th>
-                                                    Value B
+
                                                 </th>
-                                                <th class="text-center">
-                                                    Value C
+                                                <th>
+
                                                 </th>
                                             </tr>
                                         </thead>
@@ -298,27 +298,30 @@
                                                     GPS Coordinates
                                                 </td>
                                                 <td>
-                                                    73.15 N
+                                                    <span id="GPS_LATITUDE">-</span> N
                                                 </td>
                                                 <td>
-                                                    12.35 E
+                                                    <span id="GPS_LONGITUDE">-</span> E
                                                 </td>
-                                                <td class="text-center">
-                                                    -
+                                                <td>
+                                                    <span id="GPS_ALTITUDE">-</span> E
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    Time
+                                                    Packet Count
                                                 </td>
                                                 <td>
-                                                    12 H
+                                                    <span class="badge badge-primary">Container</span>
+                                                    <br> <span id="CONTAINER_PACKET_COUNT">-</span>
                                                 </td>
                                                 <td>
-                                                    25 M
+                                                    <span class="badge badge-primary">SP1</span>
+                                                    <br> <span id="SP1_PACKET_COUNT">-</span>
                                                 </td>
-                                                <td class="text-center">
-                                                    12 S
+                                                <td>
+                                                    <span class="badge badge-primary">SP2</span>
+                                                    <br> <span id="SP2_PACKET_COUNT">-</span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -326,13 +329,15 @@
                                                     Rotation Rate
                                                 </td>
                                                 <td>
-                                                    XY RPM
+                                                    -
                                                 </td>
                                                 <td>
-                                                    -
+                                                    <span class="badge badge-primary">SP1</span> <br>
+                                                    <span id="SP1_ROTATION_RATE"></span> RPM
                                                 </td>
-                                                <td class="text-center">
-                                                    -
+                                                <td>
+                                                    <span class="badge badge-primary">SP2</span> <br>
+                                                    <span id="SP2_ROTATION_RATE"></span> RPM
                                                 </td>
                                             </tr>
                                             <tr>
@@ -340,13 +345,13 @@
                                                     Altitude
                                                 </td>
                                                 <td>
-                                                    X Meters Above Sea Level
+                                                    <span class="badge badge-primary">Container</span> <br> <span id="CONTAINER_ALTITUDE"></span>
                                                 </td>
                                                 <td>
-                                                    0 Calibration Level
+                                                    <span class="badge badge-primary">SP1</span> <br> <span id="SP1_ALTITUDE"></span>
                                                 </td>
-                                                <td class="text-center">
-                                                    -
+                                                <td>
+                                                    <span class="badge badge-primary">SP2</span> <br> <span id="SP2_ALTITUDE"></span>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -354,13 +359,30 @@
                                                     Payload Status
                                                 </td>
                                                 <td>
-                                                    Connected
+                                                    -
                                                 </td>
                                                 <td>
-                                                    -
+                                                    <span class="badge badge-info" id="SP1_RELEASED">ATTACHED</span>
                                                 </td>
-                                                <td class="text-center">
-                                                    -
+                                                <td>
+                                                    <span class="badge badge-info" id="SP2_RELEASED">ATTACHED</span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Temperature
+                                                </td>
+                                                <td>
+                                                    <span class="badge badge-primary">Container</span> <br>
+                                                    <span id="CONTAINER_TEMP"> - </span> °C
+                                                </td>
+                                                <td>
+                                                    <span class="badge badge-primary">SP1</span> <br>
+                                                    <span id="SP1_TEMP"> - </span> °C
+                                                </td>
+                                                <td>
+                                                    <span class="badge badge-primary">SP2</span> <br>
+                                                    <span id="SP2_TEMP"> - </span> °C
                                                 </td>
                                             </tr>
                                             <tr>
@@ -373,21 +395,7 @@
                                                 <td>
                                                     $$$$
                                                 </td>
-                                                <td class="text-center">
-                                                    $$$$
-                                                </td>
-                                            </tr>
-                                            <tr>
                                                 <td>
-                                                    $$$$
-                                                </td>
-                                                <td>
-                                                    $$$$
-                                                </td>
-                                                <td>
-                                                    $$$$
-                                                </td>
-                                                <td class="text-center">
                                                     $$$$
                                                 </td>
                                             </tr>
@@ -459,11 +467,14 @@
     <!-- Control Center for Black Dashboard: parallax effects, scripts for the example pages etc -->
     <script src="../assets/js/black-dashboard.min.js?v=1.0.0"></script>
     <!-- Black Dashboard DEMO methods, don't include it in your project! -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
     <script src="../assets/demo/demo.js"></script>
+    <script src="../assets/js/UIlogics/mqtt2ui.js"></script>
 
     <!-- Toggle Buttons Status Changing JS -->
     <script src="../assets/js/UIlogics/toggleButtons.js"></script>
     <script src="../assets/js/UIlogics/mainLogics.js"></script>
+
 
 
     <script>

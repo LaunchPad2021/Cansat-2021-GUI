@@ -389,7 +389,10 @@ demo = {
         // });
 
 
-        chartAltitudeLabel = ['0s'];
+        chartContainerAltitudeLabel = ['0s'];
+        chartPayload1AltitudeLabel = ['0s'];
+        chartPayload2AltitudeLabel = ['0s'];
+        chartVoltageLabel = ['0s'];
         containerAltitude = [0];
         payload1Altitude = [0];
         payload2Altitude = [0];
@@ -424,7 +427,7 @@ demo = {
         //     }]
         // };
         var data = {
-            labels: chartAltitudeLabel,
+            labels: chartContainerAltitudeLabel,
             datasets: [{
                 label: "Volts (V)",
                 fill: true,
@@ -461,7 +464,7 @@ demo = {
         var config = {
             type: 'line',
             data: {
-                labels: chartAltitudeLabel,
+                labels: chartContainerAltitudeLabel,
                 datasets: [{
                     label: "Altitude (Meters)",
                     fill: true,
