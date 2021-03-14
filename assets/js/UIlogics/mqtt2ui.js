@@ -12,7 +12,9 @@ client.connect({ onSuccess: onConnect });
 // called when the client connects
 function onConnect() {
     // Once a connection has been made, make a subscription and send a message.
-    console.log("Connected to server.!");
+    notificationMessage = ["Connected to server!", 1];
+    console.log(notificationMessage);
+    demo.showNotification();
     client.subscribe("cansat/container");
     client.subscribe("cansat/sp1");
     client.subscribe("cansat/sp2");
@@ -81,7 +83,8 @@ function processContainerTelemetry() {
 
 
     updateReleaseStatus();
-    updateContainerTelemetry();
+    // updateContainerTelemetry();
+    altitudeChartData.update();
     voltageChart.update();
 }
 
@@ -91,7 +94,9 @@ function processPayload1Telemetry() {
     document.getElementById("SP1_ALTITUDE").innerText = telemetryData[4];
     chartPayload1AltitudeLabel.push(`${telemetryData[2]}s`);
     payload1Altitude.push(telemetryData[4]);
-    updatePayload1Telemetry();
+    altitudeChartData.update();
+
+    // updatePayload1Telemetry();
 }
 
 function processPayload2Telemetry() {
@@ -100,18 +105,32 @@ function processPayload2Telemetry() {
     document.getElementById("SP2_ALTITUDE").innerText = telemetryData[4];
     chartPayload2AltitudeLabel.push(`${telemetryData[2]}s`);
     payload2Altitude.push(telemetryData[4]);
-    updatePayload2Telemetry();
+    altitudeChartData.update();
+
+    // updatePayload2Telemetry();
 }
+
+RELEASE_NOTIFIED = [false, false];
 
 function updateReleaseStatus() {
     if (telemetryData[5] == "R") {
         var sp1 = document.getElementById("SP1_RELEASED");
         sp1.innerText = "RELEASED";
+        if (!RELEASE_NOTIFIED[0]) {
+            RELEASE_NOTIFIED[0] = true;
+            notificationMessage = ["Payload 1 Released..!", 2];
+            demo.showNotification();
+        }
         sp1.className = "badge badge-success";
     }
     if (telemetryData[6] == "R") {
         var sp1 = document.getElementById("SP2_RELEASED");
         sp1.innerText = "RELEASED";
+        if (!RELEASE_NOTIFIED[1]) {
+            RELEASE_NOTIFIED[1] = true;
+            notificationMessage = ["Payload 2 Released..!", 2];
+            demo.showNotification();
+        }
         sp1.className = "badge badge-success";
     }
 }
@@ -121,6 +140,7 @@ function updateReleaseStatus() {
 document.getElementById("containterTelemetrySwitch").addEventListener("click", function() {
     var status = document.getElementById("containterTelemetryStatus").innerText;
     console.log(status)
+
     switch (status) {
         case "OFF":
             var message = "ON";
@@ -129,6 +149,8 @@ document.getElementById("containterTelemetrySwitch").addEventListener("click", f
             var message = "OFF";
             break;
     }
+    notificationMessage = [`Turning Telemetry ${message}`, 0];
+    demo.showNotification()
     var message = new Paho.MQTT.Message(message);
     message.destinationName = "cansat/telemetry";
     client.send(message);

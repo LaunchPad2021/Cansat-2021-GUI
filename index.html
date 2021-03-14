@@ -39,6 +39,21 @@
                             <p>Dashboard</p>
                         </a>
                     </li>
+                    <li>
+                        <button class="btn btn-default animation-on-hover toggleButtons" style="width: 100%;" type="button" id="containterTelemetrySwitch">Container Telemetry<span class="badge badge-danger" style="font-size: small;" id="containterTelemetryStatus">OFF</span></button>
+                    </li>
+                    <li>
+                        <button class="btn btn-default animation-on-hover toggleButtons" style="width: 100%;" type="button" id="SP1TelemetrySwitch">SP 1 Telemetry<span class="badge badge-danger" style="font-size: small;" id="SP1TelemetryStatus">OFF</span></button>
+                    </li>
+                    <li>
+                        <button class="btn btn-default animation-on-hover toggleButtons" style="width: 100%;" type="button" id="SP2TelemetrySwitch">SP 2 Telemetry<span class="badge badge-danger" style="font-size: small;" id="SP2TelemetryStatus">OFF</span></button>
+                    </li>
+                    <li>
+                        <button class="btn btn-default animation-on-hover toggleButtons" style="width: 100%;" type="button" id="simulationEnableSwitch">Simulation Enable<span class="badge badge-danger" style="font-size: small;" id="simulationEnableStatus">OFF</span></button>
+                    </li>
+                    <li>
+                        <button class="btn btn-default animation-on-hover toggleButtons" style="width: 100%;" type="button" id="simulationAvtiveSwitch" value="0" disabled>Simulation Active<span class="badge badge-default" style="font-size: small;" id="simulationAvtiveStatus">OFF</span></button>
+                    </li>
                     <!-- <li>
                         <a href="./icons.html">
                             <i class="tim-icons icon-atom"></i>
@@ -144,7 +159,7 @@
             <!-- End Navbar -->
             <div class="content">
                 <!-- Telemetry Buttons -->
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-xl-3 col-6">
                         <div class="card card-nav-tabs text-center">
                             <div class="card-header card-header-primary">
@@ -159,7 +174,7 @@
                     <div class="col-xl-2 col-6">
                         <div class="card card-nav-tabs text-center">
                             <div class="card-header card-header-primary">
-                                SPI1 Telemetry
+                                SP 1 Telemetry
                             </div>
                             <div class="card-body">
                                 <h4 class="card-title"><span class="badge badge-danger" style="font-size: large;" id="SP1TelemetryStatus">OFF</span></h4>
@@ -170,7 +185,7 @@
                     <div class="col-xl-2 col-6">
                         <div class="card card-nav-tabs text-center">
                             <div class="card-header card-header-primary">
-                                SPI2 Telemetry
+                                SP 2 Telemetry
                             </div>
                             <div class="card-body">
                                 <h4 class="card-title"><span class="badge badge-danger" style="font-size: large;" id="SP2TelemetryStatus">OFF</span></h4>
@@ -200,7 +215,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <!--Altitude Chart-->
                 <div class="row">
                     <div class="col-12">
@@ -459,7 +474,7 @@
     <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
     <!--  Google Maps Plugin    -->
     <!-- Place this tag in your head or just before your close body tag. -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
     <!-- Chart JS -->
     <script src="../assets/js/plugins/chartjs.min.js"></script>
     <!--  Notifications Plugin    -->

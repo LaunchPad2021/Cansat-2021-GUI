@@ -24,6 +24,16 @@ simulationEnableSwitch.addEventListener("click", event => {
         document.getElementById("simulationAvtiveStatus").className = "badge badge-default";
         document.getElementById("simulationAvtiveStatus").textContent = "OFF";
         document.getElementById("simulationAvtiveSwitch").disabled = true;
+        stopSimulation();
+        chartContainerAltitudeLabel = ["0s"];
+        chartPayload1AltitudeLabel = ["0s"];
+        chartPayload2AltitudeLabel = ["0s"];
+        chartVoltageLabel = ["0s"];
+        containerAltitude = [0];
+        payload1Altitude = [0];
+        payload2Altitude = [0];
+        volatage = [0];
+        updateUI();
     } else {
         document.getElementById("simulationAvtiveStatus").className = "badge badge-danger";
         document.getElementById("simulationAvtiveSwitch").disabled = false;
