@@ -19,9 +19,9 @@ function onConnect() {
     client.subscribe("cansat/sp1");
     client.subscribe("cansat/sp2");
 
-    var message = new Paho.MQTT.Message("OFF");
-    message.destinationName = "cansat/telemetry";
-    client.send(message);
+    // var message = new Paho.MQTT.Message("OFF");
+    // message.destinationName = "cansat/telemetry";
+    // client.send(message);
 }
 
 // called when the client loses its connection
@@ -143,21 +143,23 @@ function updateReleaseStatus() {
     }
 }
 
-
-
-document.getElementById("containterTelemetrySwitch").addEventListener("click", function() {
-    var status = document.getElementById("containterTelemetryStatus").innerText;
-    switch (status) {
-        case "OFF":
-            var message = "ON";
-            break;
-        default:
-            var message = "OFF";
-            break;
-    }
-    notificationMessage = [`Turning Telemetry ${message}`, 0];
-    main.showNotification()
-    var message = new Paho.MQTT.Message(message);
-    message.destinationName = "cansat/telemetry";
-    client.send(message);
-})
+var telemetrySwitches = ["containerTelemetrySwitch", "SP1TelemetrySwitch", "SP2TelemetrySwitch"]
+for (let index = 0; index < telemetrySwitches.length; index++) {
+    const element = telemetrySwitches[index];
+    document.getElementById(element).addEventListener("click", function() {
+        var status = document.getElementById(element.replace("Switch", "Status")).innerText;
+        switch (status) {
+            case "OFF":
+                var message = element.replace("TelemetrySwitch", " ") + "ON";
+                break;
+            default:
+                var message = element.replace("TelemetrySwitch", " ") + "OFF";
+                break;
+        }
+        notificationMessage = [`Setting Telemetry: ${message}`, 0];
+        main.showNotification()
+        var message = new Paho.MQTT.Message(message);
+        message.destinationName = "cansat/telemetry";
+        client.send(message);
+    })
+}
