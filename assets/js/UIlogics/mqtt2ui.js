@@ -86,6 +86,7 @@ function processContainerTelemetry() {
     document.getElementById("CONTAINER_TEMP").innerText = telemetryData[8];
     document.getElementById("SP1_PACKET_COUNT").innerText = telemetryData[16];
     document.getElementById("SP2_PACKET_COUNT").innerText = telemetryData[17];
+    $("#batteryVoltage").text(telemetryData[9]);
 
     // CHECK IF PAYLOAD IS RELEASED AND UPDATE UI
     updateReleaseStatus();
@@ -157,9 +158,13 @@ for (let index = 0; index < telemetrySwitches.length; index++) {
                 break;
         }
         notificationMessage = [`Setting Telemetry: ${message}`, 0];
-        main.showNotification()
-        var message = new Paho.MQTT.Message(message);
-        message.destinationName = "cansat/telemetry";
-        client.send(message);
+        main.showNotification();
+        var state = message.split(" ")[1];
+        var device = message.split(" ")[0];
+        if (device == "container") {
+            commands.setContainerTelemetry(state);
+        } else {
+            commands.setPayloadTelemetry(device[device.length - 1], state);
+        }
     })
 }

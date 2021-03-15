@@ -63,7 +63,7 @@ main = {
                         padding: 20,
                         fontColor: "#9a9a9a",
                         autoSkip: true,
-                        maxTicksLimit: 20
+                        maxTicksLimit: 10
                     }
                 }]
             }
@@ -113,7 +113,7 @@ main = {
                         padding: 20,
                         fontColor: "#9e9e9e",
                         autoSkip: true,
-                        maxTicksLimit: 20
+                        maxTicksLimit: 10
                     }
                 }]
             }
