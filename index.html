@@ -45,7 +45,7 @@
                         <button class="btn btn-default animation-on-hover toggleButtons" style="width: 100%;" type="button" id="SP2TelemetrySwitch">SP 2 Telemetry<span class="badge badge-danger" style="font-size: small;" id="SP2TelemetryStatus">OFF</span></button>
                     </li>
                     <li>
-                        <button class="btn btn-default animation-on-hover toggleButtons" style="width: 100%;" type="button" id="simulationEnableSwitch">Simulation Enable<span class="badge badge-danger" style="font-size: small;" id="simulationEnableStatus">OFF</span></button>
+                        <button class="btn btn-default animation-on-hover toggleButtons" style="width: 100%;" type="button" id="simulationEnableSwitch" data-toggle="modal" data-target="#uploadFileModal">Simulation Enable<span class="badge badge-danger" style="font-size: small;" id="simulationEnableStatus">OFF</span></button>
                     </li>
                     <li>
                         <button class="btn btn-default animation-on-hover toggleButtons" style="width: 100%;" type="button" id="simulationAvtiveSwitch" value="0" disabled>Simulation Active<span class="badge badge-default" style="font-size: small;" id="simulationAvtiveStatus">OFF</span></button>
@@ -395,6 +395,34 @@
                         </div>
                     </div>
                 </div>
+                <!-- File Upload Modal -->
+                <div class="modal fade" id="uploadFileModal" tabindex="-1" role="dialog" aria-labelledby="uploadFileModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="uploadFileModalLabel">Upload Simulation Data File</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    <i class="tim-icons icon-simple-remove"></i>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form>
+                                            <label for="simulationTelemetryFileUpload">Simulation Data</label>
+                                            <small id="uploadHelp" class="form-text text-muted">.csv | .txt format only</small>
+                                            <input type="file" class="form-control" name="simulationTelemetryFileUpload" id="simulationTelemetryFileUpload" aria-describedby="uploadHelp">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <footer class="footer">
                 <div class="container-fluid">
@@ -472,6 +500,9 @@
 
     <!-- Toggle Buttons Status Changing JS -->
     <script src="../assets/js/UIlogics/toggleButtons.js"></script>
+
+    <!-- Data File Processing -->
+    <script src="../assets/js/UIlogics/processSimulationDataFile.js"></script>
 
 
     <script>

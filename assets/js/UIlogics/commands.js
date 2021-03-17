@@ -1,6 +1,10 @@
 commands = {
     commandPrefix: "CMD,2176,",
 
+    pressureTelemetry: -1,
+
+    simulationCommands: [],
+
     setUTCTime: function() {
         var d = new Date();
         var H = d.getUTCHours();
@@ -27,6 +31,11 @@ commands = {
         var command = `${commands.commandPrefix}SIM,${state}`;
         console.log(command);
         commands.sendCommand(command);
+        if (state == "ACTIVATE") {
+            commands.pressureTelemetry = setInterval(commands.sendSimulationData, 1000);
+        } else if (commands.pressureTelemetry != -1) {
+            clearInterval(commands.pressureTelemetry);
+        }
     },
 
     sendSimulationPressure: function(pressure) {
@@ -38,5 +47,8 @@ commands = {
         var message = new Paho.MQTT.Message(message);
         message.destinationName = "cansat/telemetry";
         client.send(message);
+    },
+    sendSimulationData: function() {
+        commands.sendCommand(commands.simulationCommands.pop());
     }
 }
